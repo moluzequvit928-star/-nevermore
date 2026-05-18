@@ -261,9 +261,22 @@ app.get('/api/discord/:id', async (req, res) => {
     res.json(profile);
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Умное определение папки со статическими файлами (public или корень, если public нет на сервере)
+const publicPath = fs.existsSync(path.join(__dirname, 'public')) 
+    ? path.join(__dirname, 'public') 
+    : __dirname;
+
+console.log(`[SERVER] Статические файлы будут отдаваться из: ${publicPath}`);
+
+app.use(express.static(publicPath));
+
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    const indexPath = path.join(publicPath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+    } else {
+        res.status(404).send('index.html not found! Check repository structure.');
+    }
 });
 
 app.listen(PORT, () => {
