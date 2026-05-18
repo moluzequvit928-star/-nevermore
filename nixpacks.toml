@@ -1,0 +1,6 @@
+# Принудительная настройка билда для Railway
+[phases.build]
+cmds = ["echo 'Skipping build phase'"]
+
+[start]
+cmd = "node server.js"
