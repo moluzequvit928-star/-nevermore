@@ -7,9 +7,31 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Твой токен бота (Берется из настроек Railway -> Variables)
-const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN ?
-    (process.env.DISCORD_BOT_TOKEN.startsWith('Bot ') ? process.env.DISCORD_BOT_TOKEN : `Bot ${process.env.DISCORD_BOT_TOKEN}`) : '';
+// Загрузка локальных переменных из .env, если файл существует
+try {
+    const envPath = path.join(__dirname, '.env');
+    if (fs.existsSync(envPath)) {
+        const envText = fs.readFileSync(envPath, 'utf-8');
+        envText.split('\n').forEach(line => {
+            const trimmed = line.trim();
+            if (trimmed && !trimmed.startsWith('#')) {
+                const parts = trimmed.split('=');
+                if (parts.length >= 2) {
+                    const key = parts[0].trim();
+                    const value = parts.slice(1).join('=').trim().replace(/^"|"$/g, '');
+                    process.env[key] = value;
+                }
+            }
+        });
+        console.log('[ENV] Локальные переменные успешно загружены из .env');
+    }
+} catch (err) {
+    console.warn('[ENV] Ошибка чтения .env файла:', err.message);
+}
+
+// Твой токен бота или селфбота (Берется из настроек Railway -> Variables или .env)
+const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN || '';
+const IS_SELFBOT = process.env.IS_SELFBOT === 'true';
 
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEbTwOKgiK57S6joVJr9nCN48dKjGdaR0rRBLby4EXJ8C4yudURwBerdAuSORl54xbhA/exec';
 
@@ -36,11 +58,20 @@ async function getUserProfile(userId) {
         return cached.data;
     }
 
+    const authHeader = DISCORD_BOT_TOKEN.startsWith('Bot ') || DISCORD_BOT_TOKEN.startsWith('Bearer ')
+        ? DISCORD_BOT_TOKEN
+        : (IS_SELFBOT ? DISCORD_BOT_TOKEN : `Bot ${DISCORD_BOT_TOKEN}`);
+
     try {
-        const response = await fetchWithTimeout(`https://discord.com/api/v10/users/${userId}`, {
+        // Для селфботов используем приватный эндпоинт профиля клиента, для ботов - официальный эндпоинт
+        const url = IS_SELFBOT
+            ? `https://discord.com/api/v9/users/${userId}/profile`
+            : `https://discord.com/api/v10/users/${userId}`;
+
+        const response = await fetchWithTimeout(url, {
             headers: {
-                'Authorization': DISCORD_BOT_TOKEN,
-                'User-Agent': 'DiscordBot (https://futurama.com, 1.0.0)'
+                'Authorization': authHeader,
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
             }
         }, 10000);
 
@@ -48,26 +79,27 @@ async function getUserProfile(userId) {
             console.warn(`[DISCORD] Ошибка для ID ${userId}: HTTP ${response.status}`);
             return null;
         }
-        const user = await response.json();
 
-        // Формируем URL аватарки
-        let avatarUrl;
-        if (user.avatar) {
-            const ext = user.avatar.startsWith('a_') ? 'gif' : 'webp';
-            avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
-        } else {
-            const defaultIdx = user.discriminator && user.discriminator !== '0'
-                ? Number(user.discriminator) % 5
-                : parseInt(String(user.id).slice(-4), 10) % 6;
-            avatarUrl = `https://cdn.discordapp.com/embed/avatars/${defaultIdx}.png`;
-        }
+        const rawData = await response.json();
+        
+        // В селфбот-ответе данные о юзере лежат в объекте "user"
+        const data = IS_SELFBOT && rawData.user ? rawData.user : rawData;
+        
+        // Мапим аватарку
+        const avatarUrl = data.avatar 
+            ? `https://cdn.discordapp.com/avatars/${userId}/${data.avatar}.png`
+            : `https://cdn.discordapp.com/embed/avatars/${parseInt(userId.slice(-4), 10) % 6}.png`;
 
-        const profile = { id: user.id, nick: user.global_name || user.username, avatar: avatarUrl };
-        profileCache.set(userId, { data: profile, time: Date.now() });
-        console.log(`[DISCORD OK] ${userId} → ${profile.nick}`);
+        const profile = {
+            id: userId,
+            nick: data.global_name || data.username || `ID: ${userId}`,
+            avatar: avatarUrl
+        };
+
+        profileCache.set(userId, { time: Date.now(), data: profile });
         return profile;
-    } catch (e) {
-        console.error(`[DISCORD ERROR] ID ${userId}:`, e.name === 'AbortError' ? 'Таймаут 10 сек' : e.message);
+    } catch (err) {
+        console.error(`[DISCORD ERROR] Не удалось загрузить ID ${userId}:`, err.message);
         return null;
     }
 }
