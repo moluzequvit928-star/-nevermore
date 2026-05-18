@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Futurama Support | Discord Сервер</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Unbounded:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        :root {
+            --blood: #a1220a;
+            --crimson: #c72a1f;
+            --ruby: #e33f2a;
+            --dark-red: #3f0a05;
+            --gold-red: #ff5e3a;
+            --obsidian: #0d0101;
+            --glass-bg: rgba(20, 4, 4, 0.7);
+            --glass-border: rgba(220, 60, 30, 0.4);
+            --text-glow: rgba(255, 80, 50, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--crimson) transparent;
+        }
+
+        body {
+            background-color: var(--obsidian);
+            color: #ffdddd;
+            font-family: 'Manrope', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            min-height: 100dvh;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Fixed Stable Background Overlay */
+        .bg-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% -10%, #4a0a0a 0%, var(--obsidian) 80%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Particles Layer */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, var(--ruby) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(1px);
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(105vh) scale(1);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.4;
+            }
+
+            90% {
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* Branding */
+        .branding {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: drift 8s ease-in-out infinite;
+        }
+
+        .logo-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .ring-1 {
+            border: 2px solid var(--ruby);
+            opacity: 0.5;
+            animation: ringPulse 4s ease-out infinite;
+        }
+
+        .ring-2 {
+            width: 120%;
+            height: 120%;
+            border: 1px dashed var(--gold-red);
+            opacity: 0.3;
+            animation: ringSpin 12s linear infinite;
+        }
+
+        .ring-3 {
+            width: 110%;
+            height: 110%;
+            background: radial-gradient(circle, var(--crimson) 0%, transparent 70%);
+            opacity: 0.2;
+            filter: blur(15px);
+            animation: ringAura 6s ease-in-out infinite;
+        }
+
+        .brand-gif {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 0 40px rgba(199, 42, 31, 0.5);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 5;
+            background: var(--obsidian);
+        }
+
+        .logo-container:hover .brand-gif {
+            transform: scale(1.08);
+            border-color: var(--gold-red);
+            box-shadow: 0 0 60px rgba(255, 94, 58, 0.8);
+        }
+
+        @keyframes ringPulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes ringSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes ringAura {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes drift {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, #ff5e3a 50%, #a1220a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px var(--text-glow));
+        }
+
+        .hero-subtitle {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            color: var(--gold-red);
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Navigation */
+        .tabs-wrapper {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tabs-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 10px;
+            border-radius: 30px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            max-width: fit-content;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+
+
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 24px;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .tab-btn i {
+            font-size: 1rem;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn.active {
+            background: var(--crimson);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(199, 42, 31, 0.5);
+        }
+
+        /* Content Sections */
+        .section-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 50px;
+            margin-bottom: 60px;
+            display: none;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-card.active-tab {
+            display: block;
+            animation: showTab 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes showTab {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-header i {
+            font-size: 2.5rem;
+            color: var(--ruby);
+            filter: drop-shadow(0 0 10px var(--ruby));
+        }
+
+        .section-header h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        /* Lists & Grid */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .content-block {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .content-block:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--glass-border);
+            transform: translateY(-5px);
+        }
+
+        .content-block h3 {
+            font-family: 'Unbounded', sans-serif;
+            color: var(--gold-red);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            transition: transform 0.2s ease;
+        }
+
+        .rules-list li::before {
+            content: "\f054";
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--crimson);
+            font-size: 0.75rem;
+            top: 4px;
+        }
+
+        .rules-list li:hover {
+            color: #fff;
+            transform: translateX(10px);
+        }
+
+        /* Schedule Grid */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .schedule-item {
+            background: rgba(20, 5, 5, 0.4);
+            padding: 18px 15px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+            min-height: 90px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .shift-name {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .shift-spots {
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.75rem;
+            color: var(--gold-red);
+            opacity: 0.9;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .schedule-item.highlight {
+            border: 1px solid var(--gold-red);
+            background: rgba(161, 34, 10, 0.15);
+            box-shadow: 0 0 20px rgba(255, 94, 58, 0.15);
+        }
+
+        .schedule-item:hover {
+            border-color: var(--ruby);
+            background: rgba(227, 63, 42, 0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .schedule-note {
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 220, 220, 0.8);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border-left: 3px solid var(--gold-red);
+        }
+
+        .schedule-note i {
+            color: var(--gold-red);
+            margin-top: 4px;
+            filter: drop-shadow(0 0 5px var(--gold-red));
+        }
+
+        /* Template & Info */
+        .template-box {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 50px;
+            border-radius: 40px;
+            font-family: 'Manrope', sans-serif;
+            line-height: 2.2;
+            color: #ffaa99;
+            border: 1px solid var(--gold-red);
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+            font-size: 1.1rem;
+            white-space: pre-line;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.6), 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .template-box:hover {
+            transform: scale(1.02);
+            border-color: #fff;
+        }
+
+        /* Rewards */
+        .reward-tier {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px 30px;
+            border-radius: 25px;
+            border-left: 5px solid var(--crimson);
+        }
+
+        .reward-icon {
+            font-size: 2.5rem;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+        }
+
+        .reward-info h4 {
+            font-family: 'Unbounded', sans-serif;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 100px;
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .branding {
+                margin-bottom: 40px;
+            }
+
+            .logo-container {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 25px;
+            }
+
+            .brand-gif {
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                font-size: clamp(1.8rem, 10vw, 2.8rem);
+                letter-spacing: -0.01em;
+            }
+
+            .hero-subtitle {
+                font-size: 0.7rem;
+                letter-spacing: 0.15em;
+                margin-bottom: 30px;
+            }
+
+            .tabs-wrapper {
+                top: 10px;
+                margin-bottom: 30px;
+            }
+
+            .tabs-container {
+                padding: 6px;
+                gap: 5px;
+                border-radius: 20px;
+            }
+
+            .tab-btn {
+                padding: 12px 18px;
+                font-size: 0.75rem;
+                gap: 8px;
+                border-radius: 18px;
+            }
+
+            .tab-btn i {
+                font-size: 0.9rem;
+            }
+
+            .section-card {
+                padding: 30px 20px;
+                border-radius: 35px;
+                margin-bottom: 40px;
+            }
+
+            .section-header {
+                margin-bottom: 25px;
+                gap: 15px;
+            }
+
+            .section-header i {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .content-block {
+                padding: 25px;
+                border-radius: 25px;
+            }
+
+            .content-block h3 {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            .rules-list li {
+                font-size: 0.9rem;
+                margin-bottom: 14px;
+                padding-left: 28px;
+            }
+
+            .schedule-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .schedule-item {
+                padding: 15px 12px;
+                min-height: 85px;
+            }
+
+            .shift-name {
+                font-size: 0.7rem;
+            }
+
+            .shift-spots {
+                font-size: 0.7rem;
+            }
+
+            .template-box {
+                padding: 30px 20px;
+                font-size: 0.95rem;
+                border-radius: 30px;
+                line-height: 1.8;
+                margin-top: 25px;
+            }
+
+            section[id="tab-verification"] h3[style*="font-size: 1.8rem"] {
+                font-size: 1.4rem !important;
+                letter-spacing: 2px !important;
+                margin: 40px 0 20px !important;
+            }
+
+            .reward-tier {
+                padding: 20px;
+                gap: 20px;
+                border-radius: 25px;
+            }
+
+            .reward-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+
+            .reward-info h4 {
+                font-size: 1rem;
+            }
+
+            .reward-info p {
+                font-size: 0.85rem;
+            }
+
+            footer {
+                margin-top: 60px;
+                padding: 50px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 10px;
+            }
+
+            .tabs-container {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 6px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-btn {
+                padding: 10px 14px;
+                font-size: 0.7rem;
+            }
+
+            .schedule-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: clamp(1.6rem, 12vw, 2.4rem);
+            }
+        }
+
+        /* Staff Cards */
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .staff-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .staff-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold-red);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .staff-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--glass-border);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .staff-card:hover::before {
+            opacity: 1;
+        }
+
+        .staff-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 2px solid var(--ruby);
+            padding: 3px;
+            background: var(--obsidian);
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .staff-card:hover .staff-avatar {
+            transform: rotate(5deg) scale(1.1);
+            border-color: var(--gold-red);
+        }
+
+        .staff-name {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .staff-name-link {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .staff-name-link:hover .staff-name {
+            color: var(--gold-red);
+            text-shadow: 0 0 10px var(--text-glow);
+        }
+
+        .staff-role {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-red);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .staff-desc {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .staff-links {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .staff-link-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .staff-link-btn:hover {
+            background: var(--crimson);
+            border-color: var(--ruby);
+            transform: scale(1.1);
+        }
+
+        .staff-category {
+            margin-bottom: 50px;
+        }
+
+        .staff-category h3 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 25px;
+            padding-left: 15px;
+            border-left: 4px solid var(--crimson);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Skeleton loader */
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
+        }
+
+        .staff-card-skeleton {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 75%);
+            background-size: 800px 100%;
+            animation: shimmer 1.6s infinite;
+            border-radius: 25px;
+            min-height: 260px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Vacancy card */
+        .staff-card-vacancy {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.12);
+            border-radius: 25px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 200px;
+            gap: 12px;
+            opacity: 0.5;
+        }
+
+        .staff-card-vacancy i {
+            font-size: 2rem;
+            color: var(--gold-red);
+        }
+
+        .staff-card-vacancy span {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Skeleton for shift spots */
+        .spots-count.loading {
+            display: inline-block;
+            width: 28px;
+            height: 14px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.06) 25%, rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0.06) 75%);
+            background-size: 300px 100%;
+            animation: shimmer 1.4s infinite;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="bg-fixed"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- Branding Section -->
+        <header class="branding">
+            <div class="logo-container">
+                <div class="logo-ring ring-1"></div>
+                <div class="logo-ring ring-2"></div>
+                <div class="logo-ring ring-3"></div>
+                <img src="a_9d430c3ef7b0e5112f1d28c6418b9722.gif" alt="Discord Logo" class="brand-gif">
+            </div>
+            <h1>Futurama Support</h1>
+            <div class="hero-subtitle">Official Staff Portal & Guidelines</div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="tabs-wrapper">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="rules"><i class="fas fa-gavel"></i> Правила</button>
+                <button class="tab-btn" data-tab="verification"><i class="fas fa-check-circle"></i> Верификация</button>
+                <button class="tab-btn" data-tab="schedule"><i class="fas fa-clock"></i> Смены</button>
+                <button class="tab-btn" data-tab="rewards"><i class="fas fa-trophy"></i> Награды</button>
+                <button class="tab-btn" data-tab="guide"><i class="fas fa-brain"></i> Памятка</button>
+                <button class="tab-btn" data-tab="administration"><i class="fas fa-crown"></i> Вышка</button>
+            </div>
+        </nav>
+
+        <!-- Content Sections -->
+        <main>
+            <!-- Rules Section -->
+            <section id="tab-rules" class="section-card active-tab">
+                <div class="section-header">
+                    <i class="fas fa-shield-halved"></i>
+                    <h2>Правила Саппортов</h2>
+                </div>
+                <div class="rules-grid">
+                    <div class="content-block">
+                        <h3><i class="fas fa-circle-xmark" style="color: #ff4444;"></i> Строго Запрещено</h3>
+                        <ul class="rules-list">
+                            <li>Неадекватное поведение и грубое общение при разборе обращений.</li>
+                            <li>Использование специальных символов (🔴) в никнейме без статуса unverify.</li>
+                            <li>Любые сторонние ссылки и рекламные приписки в профиле.</li>
+                            <li>Публичные конфликты с коллегами; обсуждение стаффа в открытых чатах.</li>
+                            <li>Злоупотребление правами: кики/муты без причины, блат друзей.</li>
+                            <li>Слив внутренней информации (скриншоты чатов, записи собраний).</li>
+                            <li>Длительный AFK в рабочих каналах вне зоны отдыха.</li>
+                            <li>Любые формы буллинга и токсичности в проходных каналах.</li>
+                            <li>Разглашение личных данных участников (деанон).</li>
+                            <li>Совмещение должностей на других серверах без одобрения.</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h3><i class="fas fa-circle-check" style="color: #44ff44;"></i> Ваши Обязанности</h3>
+                        <ul class="rules-list">
+                            <li>Своевременное информирование кураторов о любых инцидентах.</li>
+                            <li>Максимально вежливое и корректное общение с пользователями.</li>
+                            <li>Строгое соблюдение графика смен; предупреждение об отгулах.</li>
+                            <li>Внимательная проверка профиля на соответствие правилам.</li>
+                            <li>Минимум 2 часа активного онлайна в день в проходных каналах.</li>
+                            <li>Обязательное использование бота для фиксации верификаций.</li>
+                            <li>Поддержка порядка и активности в доверенной зоне.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Verification Section -->
+            <section id="tab-verification" class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-user-check"></i>
+                    <h2>Процесс Верификации</h2>
+                </div>
+                <div class="rules-grid">
+                    <div class="content-block">
+                        <h3
+                            style="color: var(--gold-red); font-family: 'Unbounded'; filter: drop-shadow(0 0 10px rgba(255, 94, 58, 0.3));">
+                            <i class="fas fa-microphone-lines"></i> Формат & Доступ
+                        </h3>
+                        <ul class="rules-list">
+                            <li><strong>1-3 Проходные:</strong> Обычный режим (без прав на мут).</li>
+                            <li><strong>4-9 Проходные:</strong> Расширенный режим (доступ к муту).</li>
+                            <li>Приоритет: Голосовая верификация (для подтверждения пола/возраста).</li>
+                            <li>Текстовая проверка разрешена только при явных признаках и плохом качестве связи.</li>
+                            <li>Длительность: Не более 2-х минут на одного пользователя.</li>
+                            <li>Команда: <code>/action ID</code></li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h3
+                            style="color: var(--gold-red); font-family: 'Unbounded'; filter: drop-shadow(0 0 10px rgba(255, 94, 58, 0.3));">
+                            <i class="fas fa-filter"></i> Допуск / Недопуск
+                        </h3>
+                        <ul class="rules-list">
+                            <li><strong>Проход:</strong> 13+ лет, адекватный профиль (ник, ава, статус).</li>
+                            <li><strong>Отказ:</strong> 18+ контент, нацизм, пропаганда ПАВ, суицид.</li>
+                            <li><strong>Поведение:</strong> soundpad, крики, неадекватность, прыжки по каналам.</li>
+                            <li><strong>Нарушение:</strong> Твинк-аккаунты для обхода наказаний.</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3
+                    style="font-family: 'Unbounded'; margin: 50px 0 30px; color: var(--gold-red); font-size: 1.8rem; text-align: center; letter-spacing: 4px; text-shadow: 0 0 20px rgba(255, 94, 58, 0.4);">
+                    ШАБЛОН ВЕРИФИКАЦИИ</h3>
+                <div class="template-box">«Привет! Как я могу к тебе обращаться?» (Определяем пол)
+                    «Подскажи, пожалуйста, сколько тебе полных лет?»
+                    «Ознакомлен ли ты с правилами нашего сервера?»
+                    (Для новых) «Наш сервер — это пространство для общения и поиска друзей. Вся важная информация в
+                    канале #информация.»
+                    «Остались ли у тебя какие-то вопросы ко мне?»
+                    «Приятного общения! Не забудь заглянуть в правила.»</div>
+
+                <div class="template-box"
+                    style="margin-top: 40px; margin-bottom: 0px; border-left-color: var(--gold-red); font-style: normal; line-height: 1.6;">
+                    <div
+                        style="font-family: 'Unbounded'; font-size: 1.2rem; margin-bottom: 15px; color: var(--gold-red);">
+                        <i class="fas fa-map-marked-alt"></i> НАВИГАЦИЯ ПО СЕРВЕРУ
+                    </div>
+                    Наш проект — это уютное пространство для свободного общения и ярких впечатлений! Здесь ты легко
+                    найдешь новых друзей, единомышленников по интересам или напарников для любимых игр. У нас работают
+                    талантливые ивентеры и креативщики, которые регулярно проводят захватывающие глобальные события,
+                    щедрые розыгрыши и совместные просмотры кино/аниме.<br><br>
+                    Чтобы твое времяпровождение было максимально комфортным, обязательно загляни во вкладку «информация»
+                    — там собраны все важные правила и советы. Все каналы круглосуточно модерируются нашими стаффами
+                    (Control и Moderator) — к ним можно обратиться по любым спорным вопросам.
+                </div>
+            </section>
+
+            <!-- Schedule Section -->
+            <section id="tab-schedule" class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-clock"></i>
+                    <h2>График Смен (МСК)</h2>
+                </div>
+                <div class="schedule-grid">
+                    <div class="schedule-item highlight" data-shift="0">
+                        <span class="shift-name">0 смена:<br>Свободный график</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="1">
+                        <span class="shift-name">1 смена: 00:00 – 02:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="2">
+                        <span class="shift-name">2 смена: 02:00 – 04:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="3">
+                        <span class="shift-name">3 смена: 04:00 – 06:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="4">
+                        <span class="shift-name">4 смена: 06:00 – 08:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="5">
+                        <span class="shift-name">5 смена: 08:00 – 10:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="6">
+                        <span class="shift-name">6 смена: 10:00 – 12:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="7">
+                        <span class="shift-name">7 смена: 12:00 – 14:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="8">
+                        <span class="shift-name">8 смена: 14:00 – 16:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="9">
+                        <span class="shift-name">9 смена: 16:00 – 18:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="10">
+                        <span class="shift-name">10 смена: 18:00 – 20:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="11">
+                        <span class="shift-name">11 смена: 20:00 – 22:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                    <div class="schedule-item" data-shift="12">
+                        <span class="shift-name">12 смена: 22:00 – 00:00</span>
+                        <span class="shift-spots">Кол-во свободных мест: <span
+                                class="spots-count loading"></span></span>
+                    </div>
+                </div>
+                <div class="schedule-note">
+                    <i class="fas fa-star"></i>
+                    <span>0 смена (Свободный график) — гибкий режим без закрепленных часов, но с сохранением минимальной
+                        нормы активности.</span>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="https://docs.google.com/spreadsheets/d/1w2r_C3R7kh5CDvlehOHOjd3DPnvCMBQ9SnXZnB6t754/edit?gid=71899517#gid=71899517"
+                        target="_blank"
+                        style="display: inline-flex; padding: 12px 40px; align-items: center; justify-content: center; font-size: 0.95rem; background: rgba(255, 94, 58, 0.05); border: 1px solid var(--gold-red); box-shadow: 0 0 20px rgba(255, 94, 58, 0.2); text-decoration: none; color: white; border-radius: 50px; font-weight: bold; font-family: 'Unbounded'; letter-spacing: 2px; transition: all 0.3s ease; backdrop-filter: blur(10px); text-transform: uppercase;"
+                        onmouseover="this.style.background='rgba(255, 94, 58, 0.15)'; this.style.boxShadow='0 0 30px rgba(255, 94, 58, 0.4)'; this.style.transform='translateY(-3px)';"
+                        onmouseout="this.style.background='rgba(255, 94, 58, 0.05)'; this.style.boxShadow='0 0 20px rgba(255, 94, 58, 0.2)'; this.style.transform='translateY(0)';">
+                        <i class="fas fa-table" style="margin-right: 12px; font-size: 1.1rem;"></i> ТАБЛИЦА
+                    </a>
+                </div>
+            </section>
+
+            <!-- Rewards Section -->
+            <section id="tab-rewards" class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-award"></i>
+                    <h2>Признание & Награды</h2>
+                </div>
+                <div class="reward-tier">
+                    <div class="reward-icon"
+                        style="color: var(--gold-red); filter: drop-shadow(0 0 10px rgba(255, 94, 58, 0.6));">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 24 24">
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M15 5.75C11.5482 5.75 8.75 8.54822 8.75 12C8.75 15.4518 11.5482 18.25 15 18.25C15.9599 18.25 16.8674 18.0341 17.6782 17.6489C18.0523 17.4712 18.4997 17.6304 18.6774 18.0045C18.8552 18.3787 18.696 18.8261 18.3218 19.0038C17.3141 19.4825 16.1873 19.75 15 19.75C10.7198 19.75 7.25 16.2802 7.25 12C7.25 7.71979 10.7198 4.25 15 4.25C19.2802 4.25 22.75 7.71979 22.75 12C22.75 12.7682 22.638 13.5115 22.429 14.2139C22.3108 14.6109 21.8932 14.837 21.4962 14.7188C21.0992 14.6007 20.8731 14.1831 20.9913 13.7861C21.1594 13.221 21.25 12.6218 21.25 12C21.25 8.54822 18.4518 5.75 15 5.75Z"
+                                clip-rule="evenodd"></path>
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M5.25 5C5.25 4.58579 5.58579 4.25 6 4.25H15C15.4142 4.25 15.75 4.58579 15.75 5 15.75 5.41421 15.4142 5.75 15 5.75H6C5.58579 5.75 5.25 5.41421 5.25 5zM4.75 8.5C4.75 8.08579 5.08579 7.75 5.5 7.75H8.5C8.91421 7.75 9.25 8.08579 9.25 8.5 9.25 8.91421 8.91421 9.25 8.5 9.25H5.5C5.08579 9.25 4.75 8.91421 4.75 8.5zM1.25 8.5C1.25 8.08579 1.58579 7.75 2 7.75H3.5C3.91421 7.75 4.25 8.08579 4.25 8.5 4.25 8.91421 3.91421 9.25 3.5 9.25H2C1.58579 9.25 1.25 8.91421 1.25 8.5zM3.25 12.5C3.25 12.0858 3.58579 11.75 4 11.75H8C8.41421 11.75 8.75 12.0858 8.75 12.5 8.75 12.9142 8.41421 13.25 8 13.25H4C3.58579 13.25 3.25 12.9142 3.25 12.5zM12.376 8.58397C12.5151 8.37533 12.7492 8.25 13 8.25H17C17.2508 8.25 17.4849 8.37533 17.624 8.58397L19.624 11.584C19.792 11.8359 19.792 12.1641 19.624 12.416L17.624 15.416C17.4849 15.6247 17.2508 15.75 17 15.75H13C12.7492 15.75 12.5151 15.6247 12.376 15.416L10.376 12.416C10.208 12.1641 10.208 11.8359 10.376 11.584L12.376 8.58397zM13.4014 9.75L11.9014 12 13.4014 14.25H16.5986L18.0986 12 16.5986 9.75H13.4014z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="reward-info">
+                        <h4>🥇 Первое место</h4>
+                        <p>Подписка Discord Nitro Full на один месяц.</p>
+                    </div>
+                </div>
+                <div class="reward-tier">
+                    <div class="reward-icon" style="color: #c0c0c0;"><i class="fas fa-star"></i></div>
+                    <div class="reward-info">
+                        <h4>🥈 Второе место</h4>
+                        <p>Любое украшение профиля или активный баннер на выбор.</p>
+                    </div>
+                </div>
+                <div class="reward-tier">
+                    <div class="reward-icon" style="color: #cd7f32;"><i class="fas fa-coins"></i></div>
+                    <div class="reward-info">
+                        <h4>🥉 Третье место</h4>
+                        <p>8.500 ед. внутрисерверной валюты на личный баланс.</p>
+                    </div>
+                </div>
+                <div class="content-block" style="margin-top: 40px;">
+                    <p style="opacity: 0.8; font-size: 0.9rem;"><i class="fas fa-circle-info"></i> Итоги подводятся
+                        еженедельно. Основной критерий: сумма активных часов и количество успешно проведенных
+                        верификаций.</p>
+                </div>
+            </section>
+
+            <!-- Guide Section -->
+            <section id="tab-guide" class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-brain"></i>
+                    <h2>Памятка саппорта</h2>
+                </div>
+                <div class="rules-grid">
+                    <div class="content-block">
+                        <h3><i class="fas fa-eye"></i> При верификации</h3>
+                        <ul class="rules-list">
+                            <li>Внимательно проверяй профиль: аватарку, ник, «о себе».</li>
+                            <li>С 1 по 3 проходную — сидим в свои прайм-таймы без прав на mute.</li>
+                            <li>С 4 по 9 проходную — можно выдавать mute при необходимости.</li>
+                            <li>Разрешены адекватные трансляции, фильмы, игры, но не мешающие верификации.</li>
+                        </ul>
+                    </div>
+                    <div class="content-block">
+                        <h3><i class="fas fa-link"></i> Ссылки и контент</h3>
+                        <ul class="rules-list">
+                            <li>Ссылки на соцсети (Instagram, VK, Telegram) разрешены, если нет запрещенного контента.
+                            </li>
+                            <li>Запрещены ссылки на шокирующий, мошеннический, запрещенный контент.</li>
+                            <li>Любые конфликтные ситуации докладывать куратору.</li>
+                            <li>Всегда поддерживай порядок в проходных, не оставляй пустые каналы.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- Administration Section -->
+            <section id="tab-administration" class="section-card">
+                <div class="section-header">
+                    <i class="fas fa-crown"></i>
+                    <h2>Высшая Администрация</h2>
+                </div>
+
+                <!-- Основной курирующий состав -->
+                <div class="staff-category" id="admin-section">
+                    <h3><i class="fas fa-star" style="color: #ffd700;"></i> Основной курирующий состав</h3>
+                    <div class="staff-grid" id="admin-grid">
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                    </div>
+                </div>
+
+                <!-- Кураторский состав -->
+                <div class="staff-category" id="curators-section">
+                    <h3><i class="fas fa-shield-halved"></i> Кураторский Состав</h3>
+                    <div class="staff-grid" id="curators-grid">
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                    </div>
+                </div>
+
+                <!-- Мастера -->
+                <div class="staff-category" id="masters-section">
+                    <h3><i class="fas fa-user-tie"></i> Мастера</h3>
+                    <div class="staff-grid" id="masters-grid">
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                        <div class="staff-card-skeleton"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div style="margin-bottom: 20px; color: var(--gold-red); font-weight: bold;">
+                <i class="fas fa-shield-heart"></i> FUTURAMA SUPPORT TEAM
+            </div>
+            <p>© 2026 Futurama Support. Защищаем наше сообщество, каждого его участника.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.5;">Designed for Premium Experience</p>
+        </footer>
+    </div>
+
+    <script>
+        // Efficient Particle System
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const count = window.innerWidth < 768 ? 20 : 40;
+
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+
+                const size = Math.random() * 5 + 2;
+                p.style.width = `${size}px`;
+                p.style.height = `${size}px`;
+                p.style.left = `${Math.random() * 100}%`;
+                p.style.top = `${Math.random() * 100}%`;
+                p.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                p.style.animationDelay = `${Math.random() * 10}s`;
+                p.style.opacity = Math.random() * 0.5;
+
+                container.appendChild(p);
+            }
+        }
+
+        // Tab Management
+        function initTabs() {
+            const btns = document.querySelectorAll('.tab-btn');
+            const sections = document.querySelectorAll('.section-card');
+
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.dataset.tab;
+
+                    btns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    sections.forEach(s => {
+                        s.classList.remove('active-tab');
+                        if (s.id === `tab-${target}`) {
+                            s.classList.add('active-tab');
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                            if (target === 'schedule') updateShiftSpots();
+                            if (target === 'administration') updateAdminSection();
+                        }
+                    });
+                });
+            });
+        }
+
+        // Google Apps Script Integration
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEbTwOKgiK57S6joVJr9nCN48dKjGdaR0rRBLby4EXJ8C4yudURwBerdAuSORl54xbhA/exec';
+
+        // ─── Смены: обновление свободных мест ─────────────────────────────────────
+        async function updateShiftSpots() {
+            try {
+                if (SCRIPT_URL.includes('ВАША_ССЫЛКА')) return;
+                const response = await fetch(`${SCRIPT_URL}?t=${Date.now()}`, {
+                    method: 'GET',
+                    redirect: 'follow'
+                });
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const data = await response.json();
+                const shifts = data.shifts || data;
+
+                Object.keys(shifts).forEach(shiftId => {
+                    const freeSpots = shifts[shiftId];
+                    const shiftEl = document.querySelector(`.schedule-item[data-shift="${shiftId}"] .spots-count`);
+                    if (shiftEl) {
+                        const count = freeSpots !== undefined ? freeSpots : '0';
+                        shiftEl.classList.remove('loading');
+                        shiftEl.innerText = count;
+                        const item = shiftEl.closest('.schedule-item');
+                        if (item) {
+                            if (parseInt(count) === 0) {
+                                item.classList.add('no-spots');
+                                item.style.opacity = '0.6';
+                                item.style.borderColor = 'rgba(255, 68, 68, 0.3)';
+                            } else {
+                                item.classList.remove('no-spots');
+                                item.style.opacity = '1';
+                                item.style.borderColor = '';
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Ошибка синхронизации смен:', error);
+                document.querySelectorAll('.spots-count.loading').forEach(el => {
+                    el.classList.remove('loading');
+                    el.innerText = '?';
+                });
+            }
+        }
+
+        // Строим HTML карточки по данным
+        function buildStaffCard(member, roleLabel, roleColor, topBorder, desc) {
+            if (!member || !member.id) return '';
+            const username = member.nick || member.id;
+            const avatarUrl = member.avatar || `https://cdn.discordapp.com/embed/avatars/${Number(member.id) % 6}.png`;
+            const discordLink = `discord://-/users/${member.id}`;
+            const borderStyle = topBorder ? `style="border-top: ${topBorder};"` : '';
+            const roleStyle = roleColor ? `style="color:${roleColor}; font-weight:800;"` : '';
+
+            return `
+                <div class="staff-card" ${borderStyle}>
+                    <img src="${avatarUrl}" alt="${username}" class="staff-avatar"
+                         onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                    <a href="${discordLink}" target="_blank" class="staff-name-link">
+                        <div class="staff-name">${username}</div>
+                    </a>
+                    <div class="staff-role" ${roleStyle}>${roleLabel}</div>
+                    <p class="staff-desc">${desc}</p>
+                    <div class="staff-links">
+                        <a href="${discordLink}" target="_blank" class="staff-link-btn" title="Discord">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>`;
+        }
+
+        function showError(gridId) {
+            const el = document.getElementById(gridId);
+            if (el) el.innerHTML = '<p style="opacity:0.5;padding:20px">Не удалось загрузить данные</p>';
+        }
+
+        function buildVacancyCard() {
+            return `<div class="staff-card-vacancy"><i class="fas fa-user-slash"></i><span>Вакантно</span></div>`;
+        }
+
+        // --- Загрузка вышки ---
+        let adminLoaded = false;
+
+        async function updateAdminSection() {
+            if (adminLoaded) return;
+            try {
+                const res = await fetch(`/api/staff?t=${Date.now()}`);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                const staff = data.staff || {};
+
+                if (Object.keys(staff).length > 0) {
+                    adminLoaded = true;
+                }
+
+                // ── Основной курирующий состав ──
+                const adminGrid = document.getElementById('admin-grid');
+                if (adminGrid) {
+                    const cards = [
+                        buildStaffCard(
+                            staff.admin,
+                            'Администратор Саппортов', '#ffd700', '4px solid #ffd700',
+                            'Старший администратор Futurama Support. Ответственный за глобальный порядок и работу всего стаффа.'
+                        ),
+                        buildStaffCard(
+                            staff.assistant,
+                            'Помощник Ветки', 'var(--gold-red)', '4px solid var(--gold-red)',
+                            'Помощник ветки Futurama Support. Ответственная за координацию состава и общую помощь.'
+                        ),
+                        buildStaffCard(
+                            staff.head_curator,
+                            'Главный Куратор', '#ff5533', '4px solid #ff5533',
+                            'Главный куратор Futurama Support. Отвечает за контроль деятельности кураторов и мастеров.'
+                        )
+                    ].filter(Boolean);
+                    adminGrid.innerHTML = cards.length > 0 ? cards.join('') : buildVacancyCard();
+                }
+
+                // ── Кураторы ──
+                const curatorsGrid = document.getElementById('curators-grid');
+                if (curatorsGrid) {
+                    const defs = [
+                        { key: 'curator_1_3', role: 'Куратор Саппортов', color: null, border: null, desc: 'Отвечает за 1, 2 и 3 смены. Контроль ночного и утреннего состава.' },
+                        { key: 'curator_4_6', role: 'Куратор Саппортов', color: null, border: null, desc: 'Отвечает за 4, 5 и 6 смены. Контроль утреннего и дневного состава.' },
+                        { key: 'curator_7_9', role: 'Куратор Саппортов', color: null, border: null, desc: 'Отвечает за 7, 8 и 9 смены. Контроль дневного и вечернего состава.' },
+                        { key: 'curator_10_12', role: 'Куратор Саппортов', color: null, border: null, desc: 'Отвечает за 10, 11 и 12 смены. Контроль вечернего и ночного состава.' },
+                    ];
+                    curatorsGrid.innerHTML = defs
+                        .map(d => buildStaffCard(staff[d.key], d.role, d.color, d.border, d.desc) || buildVacancyCard())
+                        .join('');
+                }
+
+                // ── Мастера ──
+                const mastersGrid = document.getElementById('masters-grid');
+                if (mastersGrid) {
+                    const defs = [
+                        { key: 'master_1a', desc: 'Отвечает за 1, 2 и 3 сменную верификацию. Опытный наставник состава.' },
+                        { key: 'master_1b', desc: 'Отвечает за 1, 2 и 3 сменную верификацию. Опытный наставник состава.' },
+                        { key: 'master_2a', desc: 'Отвечает за 4, 5 и 6 смены. Контроль дневной активности и качества работы.' },
+                        { key: 'master_2b', desc: 'Отвечает за 4, 5 и 6 смены. Контроль дневной активности и качества работы.' },
+                        { key: 'master_3a', desc: 'Отвечает за 7, 8 и 9 смены. Поддержка порядка в прайм-тайм проекта.' },
+                        { key: 'master_3b', desc: 'Отвечает за 7, 8 и 9 смены. Поддержка порядка в прайм-тайм проекта.' },
+                        { key: 'master_4a', desc: 'Отвечает за 10, 11 и 12 смены. Ночной контроль верификаций и состава.' },
+                        { key: 'master_4b', desc: 'Отвечает за 10, 11 и 12 смены. Контроль вечернего и ночного состава.' },
+                        { key: 'master_0a', desc: 'Отвечает за 0 смену. Контроль свободного графика и качества работы.' },
+                        { key: 'master_0b', desc: 'Отвечает за 0 смену. Контроль свободного графика и качества работы.' },
+                    ];
+                    mastersGrid.innerHTML = defs
+                        .map(d => buildStaffCard(staff[d.key], 'Мастер', null, null, d.desc) || buildVacancyCard())
+                        .join('');
+                }
+
+            } catch (err) {
+                console.error('Ошибка загрузки вышки:', err);
+                ['admin-grid', 'curators-grid', 'masters-grid'].forEach(showError);
+            }
+        }
+
+        // ─── Initialize ───────────────────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            initTabs();
+            updateShiftSpots();
+            updateAdminSection();
+            setInterval(updateShiftSpots, 30000);
+        });
+    </script>
+</body>
+
+</html>
