@@ -1470,17 +1470,17 @@
                         buildStaffCard(
                             staff.admin,
                             'Администратор Саппортов', '#ffd700', '4px solid #ffd700',
-                            'Старший администратор Futurama Support. Ответственный за глобальный порядок и работу всего стаффа.'
+                            'Администратор ветки Support. Ответственный за глобальный порядок и работу ветки Support, так же отвечает за тех часть.'
                         ),
                         buildStaffCard(
                             staff.assistant,
                             'Помощник Ветки', 'var(--gold-red)', '4px solid var(--gold-red)',
-                            'Помощник ветки Futurama Support. Ответственная за координацию состава и общую помощь.'
+                            'Помощник ветки Futurama Support. Отвечает за 0 смену и разбор репортов.'
                         ),
                         buildStaffCard(
                             staff.head_curator,
                             'Главный Куратор', '#ff5533', '4px solid #ff5533',
-                            'Главный куратор Futurama Support. Отвечает за контроль деятельности кураторов и мастеров.'
+                            'Главный куратор ветки Support. Отвечает за контроль деятельности кураторов и мастеров.'
                         )
                     ].filter(Boolean);
                     adminGrid.innerHTML = cards.length > 0 ? cards.join('') : buildVacancyCard();
@@ -1492,7 +1492,7 @@
                     const defs = [
                         { key: 'curator_1_3', role: 'Куратор Саппортов', color: null, border: null, desc: 'Отвечает за 1, 2 и 3 смены. Контроль ночного и утреннего состава.' },
                         { key: 'curator_4_6', role: 'Куратор Саппортов', color: null, border: null, desc: 'Отвечает за 4, 5 и 6 смены. Контроль утреннего и дневного состава.' },
-                        { key: 'curator_7_9', role: 'Куратор Саппортов', color: null, border: null, desc: 'Отвечает за 7, 8 и 9 смены. Контроль дневного и вечернего состава.' },
+                        { key: 'curator_7_9', role: 'Куратор Саппортов', color: null, border: null, desc: 'Отвечает за 7, 8 и 9 смены. Контроль дневного и вечернего состава, так же является тех куратор.' },
                         { key: 'curator_10_12', role: 'Куратор Саппортов', color: null, border: null, desc: 'Отвечает за 10, 11 и 12 смены. Контроль вечернего и ночного состава.' },
                     ];
                     curatorsGrid.innerHTML = defs
